@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
-//for->only contructs for looping
+// for->only contructs for looping
 func main() {
 	i := 5
 	switch i {
@@ -14,5 +17,12 @@ func main() {
 		fmt.Println("three")
 	default:
 		fmt.Println("bestcolor")
+	}
+
+	switch time.Now().Weekday() {
+	case time.Saturday, time.Sunday:
+		fmt.Println("its weekend")
+	case time.Monday:
+		fmt.Println("its weekday")
 	}
 }
