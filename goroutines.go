@@ -5,21 +5,16 @@ import (
 	"sync"
 )
 
-func main() {
-	fmt.Println("I am not from goroutines")
-	var wg sync.WaitGroup
-	collection := []int{1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12}
-	for _, v := range collection {
-		go func(val int) {
-			wg.Add(1)
-			print(val, &wg)
-		}(v)
+func hello(num int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	for i := 0; i < num; i++ {
+		fmt.Println("Output is", i)
 	}
-	wg.Wait()
 }
 
-func print(input int, w *sync.WaitGroup) {
-	fmt.Println("print %", input)
-	defer w.Done()
-
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go hello(5, &wg)
+	wg.Wait()
 }
